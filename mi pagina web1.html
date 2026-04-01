@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChileSenderos | Rutas y Comunidad de Trekking</title>
+    
+    <style>
+        /* 1. CONFIGURACIÓN Y VARIABLES (CSS3) */
+        :root {
+            --verde-primario: #2d5a27;
+            --verde-oscuro: #1e3d1a;
+            --acento-naranja: #d35400; 
+            --blanco: #ffffff;
+            --gris-claro: #f4f7f6;
+            --negro-transparente: rgba(0, 0, 0, 0.6); /* Para legibilidad sobre fotos */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--gris-claro);
+        }
+
+        /* 2. NAVEGACIÓN (FLEXBOX) */
+        header {
+            background-color: var(--verde-primario);
+            color: var(--blanco);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 2000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        nav a:hover, nav a:focus {
+            color: var(--acento-naranja);
+            outline: 2px solid var(--acento-naranja);
+            outline-offset: 5px;
+        }
+
+        /* 3. HERO SECTION (IMAGEN DE FONDO PROPIA) */
+        .hero-inicio {
+            /* IMPORTANTE: Asegúrate de que esta ruta sea correcta en tu carpeta */
+            background-image: url('img/fondo-senderismo.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efecto elegante al hacer scroll */
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0;
+        }
+
+        .hero-overlay {
+            background-color: var(--negro-transparente);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--blanco);
+            max-width: 900px;
+        }
+
+        .hero-content h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .btn-cta {
+            background-color: var(--acento-naranja);
+            color: var(--blanco);
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, background 0.3s;
+            display: inline-block;
+        }
+
+        .btn-cta:hover {
+            background-color: #e67e22;
+            transform: scale(1.05);
+        }
+
+        /* 4. SECCIONES Y GRID */
+        main {
+            padding: 40px 5%;
+        }
+
+        section {
+            padding: 80px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h3.section-title {
+            font-size: 2rem;
+            color: var(--verde-primario);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        h3.section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--acento-naranja);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .grid-rutas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        article {
+            background: var(--blanco);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        article img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        /* 5. FORMULARIO COMUNIDAD */
+        .form-comunidad {
+            background: var(--verde-primario);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        /* 6. FOOTER */
+        footer {
+            background: #1a1a1a;
+            color: #888;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .hero-content h2 { font-size: 2.2rem; }
+            header { flex-direction: column; padding: 15px; }
+            nav ul { margin-top: 15px; gap: 10px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ChileSenderos</h1>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#rutas">Rutas Santiago</a></li>
+                <li><a href="#compartir">Comunidad</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero-inicio">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h2>Explora la Cordillera con tus propios ojos</h2>
+                <p>Descubre las mejores rutas de trekking en Santiago y todo Chile a través de fotos reales y experiencias compartidas.</p>
+                <a href="#rutas" class="btn-cta">Empezar a explorar</a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section id="rutas">
+            <h3 class="section-title">Rutas Populares en Santiago</h3>
+            <div class="grid-rutas">
+                <article>
+                    <img src="img/las-vizcachas.jpg" alt="Cumbre del Cerro Alto de las Vischas">
+                    <div class="card-body">
+                        <h4>Cerro Alto de las Vizcachas</h4>
+                        <p>Dificultad: Moderada-Alta. El mejor lugar para meditar y ver Santiago.</p>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="img/quebrada-macul.jpg" alt="Cascada san Juan en quebrada de Macul">
+                    <div class="card-body">
+                        <h4>Parque natural quebrada de Macul</h4>
+                        <p>Dificultad: Baja-Moderada. Senderos con agua cordillerana y mucha flora nativa.</p>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="img/embalse-yeso.jpg" alt="Sendero familiar en san José de Maipo">
+                    <div class="card-body">
+                        <h4>Embalse el Yeso</h4>
+                        <p>Dificultad: Fácil. Un panorama familiar para salir de la rutina.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="compartir">
+            <h3 class="section-title">Tu experiencia nos inspira</h3>
+            <div class="form-comunidad">
+                <form>
+                    <div class="form-group">
+                        <label for="nombre">¿Dónde estuviste?</label>
+                        <input type="text" id="nombre" placeholder="Ej: Mirador de Cóndores, Cajón del Maipo">
+                    </div>
+                    <div class="form-group">
+                        <label for="historia">Cuéntanos tu aventura:</label>
+                        <textarea id="historia" rows="4" placeholder="¿Cómo estaba el sendero?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Sube tu foto de propiedad:</label>
+                        <input type="file" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn-cta" style="width: 100%; border-radius: 8px;">Publicar Experiencia</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Desarrollado para el Proyecto Universitario de Salud y Bienestar.</p>
+        <p>Santiago de Chile, 2026.</p>
+    </footer>
+
+</body>
+</html>
